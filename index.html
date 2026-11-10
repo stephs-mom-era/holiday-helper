@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holiday Helper Elf: a free AI prompt that plans your holidays</title>
+<meta name="description" content="Copy one prompt, paste it into ChatGPT, Claude or Gemini, answer about 10 quick questions, and get a holiday plan that fits your real life. Free.">
+<meta property="og:title" content="Holiday Helper Elf: less stress, less mess, more joy">
+<meta property="og:description" content="A free AI prompt that interviews you first, then plans your whole holiday season.">
+<meta property="og:image" content="art/sleigh.png">
+<meta name="theme-color" content="#FBF3E4">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBF3E4;--card:#FFFDF8;--blush:#F5E6CB;--border:rgba(158,42,43,0.20);--peach:#E2CBA0;--plum:#9E2A2B;--plum-2:#B83B3B;--ink:#3A2A1E;--mid:#5A4030;--light:#8A6A4A;--green:#2F5D46;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--mid);font-size:16px;line-height:1.6;}
+.page{max-width:760px;margin:0 auto;padding:28px 20px 80px;}
+.hero{display:block;width:min(70%,420px);margin:0 auto 8px;height:auto;}
+.eyebrow{text-align:center;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--plum);margin-bottom:10px;}
+h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:40px;line-height:1.1;color:var(--ink);text-align:center;margin-bottom:10px;}
+.tagline{text-align:center;font-size:17px;color:var(--mid);margin-bottom:18px;}
+.pill{display:block;width:fit-content;margin:0 auto 26px;background:var(--blush);border:1px solid var(--border);border-radius:99px;padding:6px 14px;font-size:12px;color:var(--mid);text-align:center;}
+.card{background:var(--card);border:1px solid var(--peach);border-radius:12px;padding:22px 24px;margin-bottom:26px;}
+.card h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:var(--ink);margin-bottom:12px;line-height:1.15;}
+.card p{margin-bottom:10px;}
+.card p:last-child{margin-bottom:0;}
+.step{display:flex;gap:14px;margin-bottom:16px;}
+.step:last-child{margin-bottom:0;}
+.n{flex:0 0 30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-weight:500;display:flex;align-items:center;justify-content:center;}
+.b{flex:1;min-width:0;}
+button{font-family:'DM Sans',sans-serif;cursor:pointer;min-height:48px;border-radius:8px;font-size:16px;font-weight:500;padding:12px 22px;}
+.btn-primary{background:var(--plum);color:#fff;border:none;}
+.btn-primary:hover{background:var(--plum-2);}
+.btn-secondary{background:#fff;color:var(--plum);border:1px solid var(--plum);}
+.btn-secondary:hover{background:var(--blush);}
+.copyrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0 6px;}
+.msg{font-size:14px;color:var(--green);min-height:22px;}
+.msg.err{color:#B03030;}
+pre.prompt{white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.5;background:var(--blush);border:1px solid var(--border);border-radius:10px;padding:16px;max-height:340px;overflow:auto;color:var(--ink);}
+.fiction{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;border-radius:99px;padding:3px 10px;margin-bottom:10px;}
+.qa{margin-bottom:12px;font-size:15px;}
+.qa .q{color:var(--plum);font-weight:500;}
+.qa .a{color:var(--ink);}
+.sum{background:var(--blush);border-radius:10px;padding:14px 16px;font-size:15px;}
+.sum p{margin-bottom:6px;}
+.sum strong{color:var(--ink);}
+ul.check{list-style:none;}
+ul.check li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed var(--peach);font-size:15px;}
+ul.check li:last-child{border-bottom:none;}
+ul.check li:before{content:"\2610";position:absolute;left:0;top:8px;color:var(--plum);font-size:18px;}
+.own{font-size:12px;font-weight:600;color:var(--green);background:#E6EFE9;border-radius:99px;padding:1px 8px;white-space:nowrap;}
+.tablewrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px;}
+th{text-align:left;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--plum);border-bottom:2px solid var(--peach);padding:6px 8px;}
+td{padding:8px;border-bottom:1px solid var(--peach);vertical-align:top;color:var(--ink);}
+.note{font-size:13px;color:var(--light);margin-top:10px;}
+.promise{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;line-height:1.3;color:var(--ink);margin:34px 10px 10px;}
+.promise small{display:block;font-family:'DM Sans',sans-serif;font-style:normal;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--plum);margin-top:10px;}
+.tips li{margin-left:20px;margin-bottom:6px;font-size:15px;}
+footer{text-align:center;font-size:12px;color:var(--light);margin-top:34px;}
+@media(max-width:600px){h1{font-size:31px;}.card{padding:18px 16px;}}
+</style>
+</head>
+<body>
+<div class="page">
+  <img class="hero" src="art/sleigh.png" alt="">
+  <div class="eyebrow">Free &middot; Holiday Helper Elf</div>
+  <h1>Less stress, less mess, more joy.</h1>
+  <p class="tagline">One prompt. Your AI interviews you, then plans your whole holiday season.</p>
+  <span class="pill">&#128274; This page never sees your answers. They stay in your AI chat.</span>
+
+  <div class="card">
+    <h2>What this is</h2>
+    <p>It's a long prompt I wrote with my AI. You paste it into ChatGPT, Claude or Gemini. The AI asks you about 10 quick questions first. Then it builds a plan that fits your real calendar, your real budget and your real family.</p>
+    <p>It's long on purpose. The length is what turns a generic list into a plan that fits your life.</p>
+  </div>
+
+  <div class="card">
+    <h2>How to use it</h2>
+    <div class="step"><div class="n">1</div><div class="b"><strong>Copy the prompt.</strong> Big button below.</div></div>
+    <div class="step"><div class="n">2</div><div class="b"><strong>Paste it</strong> into ChatGPT, Claude or Gemini and hit send.</div></div>
+    <div class="step"><div class="n">3</div><div class="b"><strong>Answer the questions in one go.</strong> One word is enough: "You pick." "Yes." "Standard." Skip one and the AI uses its default and tells you.</div></div>
+    <div class="step"><div class="n">4</div><div class="b"><strong>Get your plan.</strong> Checklists, a gift tracker, who owns what, and time left to enjoy it.</div></div>
+  </div>
+
+  <div class="card" id="promptCard">
+    <h2>The prompt</h2>
+    <div class="copyrow">
+      <button class="btn-primary" id="copyBtn" onclick="copyPrompt()">Copy the prompt</button>
+      <span class="msg" id="copyMsg" role="status"></span>
+    </div>
+    <pre class="prompt" id="promptText" tabindex="0">YOU ARE MY HOLIDAY HELPER ELF
+Act as my Holiday Helper Elf and holiday chief of staff. Build me a complete holiday prep plan for this season.
+Your goal: Less Stress, Less Mess, More Joy.
+Do NOT promise me a stress-free holiday — I’m not delusional, and neither are you. Give me a plan that makes the season go a little smoother and feel a little less overwhelming, front-loads the work, and protects time to actually enjoy it. I should not reach mid-December feeling like I did nothing but plan.
+
+STEP 0 — THE INTERVIEW (DO THIS FIRST — DO NOT PLAN YET)
+Do NOT build the plan until you have interviewed me and I have answered. The interview comes first, so the plan is right out of the gate — I am not going to iterate back and forth to fix it.
+Assume we are planning for Christmas, main date December 25, unless I say another holiday or date in any answer.
+First, find out what is already happening:
+
+A) IF you are already connected to my email and calendar:
+- Look at my calendar from today through January 2 for: travel, visitors, work deadlines, school events and breaks, performances, parties, appointments, and any day that is already full.
+- Look at my recent email for: order and shipping deadlines, event invitations and RSVPs, school notices, travel confirmations, and anything with a date I could miss.
+- Show me, as a short list, what you found that affects the plan: fixed events I cannot move, conflicts, and tight weeks.
+- Build the plan AROUND those things. Never schedule prep on top of a fixed event, and never suggest moving something that is already booked unless I ask.
+
+B) IF you are NOT connected to my email and calendar:
+- First ask me, in one sentence, whether I want to connect them so the plan can work around my real schedule.
+- If I say yes, pause and wait while I connect them, then use branch A.
+- If I say no, or I don’t want to connect them, do not push. Accept the no, then ask me the interview questions below and build the plan from my answers.
+
+THE INTERVIEW — ASK ALL OF THESE IN ONE ROUND, THEN WAIT
+Rules: keep it short and targeted — these questions only, in one numbered list. Every question proposes a default or options, so I can answer in a word. Never ask an open-ended question without a proposed answer. Do NOT build the plan until I answer. If I skip a question, use its stated default and say so plainly in the plan (‘Used default: …’). If a date I pick clashes with my calendar, propose the nearest free alternative in the same message — do not ask and wait.
+1. SANTA PHOTO: ‘Do you want to tell me what date you want to go see Santa, or do you just want me to pick?’ If I tell you a date, use it. If I say you pick — or I skip — propose the earliest free weekend date after Thanksgiving, and put the booking day (exactly 7 days before) on the calendar.
+2. HOLIDAY LIGHTS: ‘Do you want to tell me which lights show and what date, or do you just want me to pick?’ If I pick, use mine. Default: you pick the earliest free evening and one main lights outing, plus an optional neighborhood lights walk.
+3. PARTNER: ‘Do you want your partner to be a part of this? I’m proposing these tasks for your partner: tree and outdoor lights, Santa photo booking, one store trip, teacher gifts.’ I answer yes, no, or tell you what to move. Default: yes, as proposed. Ownership means the whole chunk — noticing, planning, and doing — not errands I still have to remind and chase.
+4. GIFT LIST: ‘Who is on your gift list — roles only, not real names — and what budget per person? Reply with your roles and numbers, or say Standard.’ Default (Standard): Partner, Kids, Grandparents, Siblings, Close friends, Teachers — with a placeholder budget per person that you state in the question and I can change in a word.
+5. SECRET SANTA: ‘Any group gift exchanges? Reply None, or: how many draws, who is in each — including whether both partners are in — the budget for each, and letter theme or wish list?’ Default if I have one but skip the details: one draw, both partners in if that applies, an easy letter theme, no wish lists, thoughtful real gift (a small gag extra only on top).
+6. CARDS: ‘Are you sending holiday cards — Yes or No — and is the photo already picked — Picked or Not yet?’ Default: Yes, not yet picked — so schedule picking the photo early.
+7. TEACHER GIFTS + HELPER BONUS: ‘Do you have teacher gifts, and a holiday bonus or tip for regular household helpers? Reply Both, Teachers only, Helpers only, or Neither.’ Default: Both, if they apply to me.
+8. SANTA LETTERS: ‘Include the three-letter Santa set? Yes or No.’ Default: Yes — (1) letter from Santa in the first week of December, (2) reply a few days after my child sends their wish list, in the second week of December, (3) Nice List certificate on Christmas Eve. If I do not have a set, add ‘get a Santa letter set’ as an early task.
+9. TAKE IT OFF: ‘What can come OFF the list this year? Pick any: extra baking, elaborate decor, a second lights trip, hosting, matching outfits, anything handmade — or say Nothing, or say Cut one and I will cut the lowest-joy, highest-effort item.’ Default if I skip: cut one and list it in the ‘let it go’ list. This is the most valuable question — always ask it.
+10. ALREADY BOOKED (only ask this if you cannot see my calendar): ‘Anything already booked or fixed I must work around — travel, visitors, performances, parties, school breaks, hosting, work or childcare constraints? List them, or say Nothing fixed.’ Default: nothing fixed beyond what I said above.
+After I answer, build the whole plan from my answers plus what you found in Step 0, branch A. Do not come back with more rounds of questions unless something I said truly clashes — and then propose the fix in the same message.
+
+STEP 1 — PLAN THE GIFTS BEFORE I BUY ANYTHING (USE MY INTERVIEW ANSWERS)
+Keep deciding and buying in two separate phases. Deciding under time pressure in a store is where the stress and overspending happen.
+- Phase 1, deciding (schedule this first, on a calm day): one checklist line per person — gift idea, backup idea, budget, and where I will get it (online or in a store).
+- Phase 2, buying (schedule this later, in blocks): group every online order into one or two sittings, early enough for shipping delays. Group every in-store item into ONE planned store trip (two at most), on a day that actually works in my calendar — never a vague ‘sometime this weekend.’
+- Add a gift tracker I can check off: person, gift, owner (see Step 2), bought?, wrapped?, delivered / hidden where?
+- Include teacher gifts as a default line item if my kids have teachers: gift or card idea, budget, and the date it needs to go to school.
+- Include a holiday bonus or tip for anyone who regularly helps my household — cleaning, childcare, or other regular help — if that applies to me: amount, how I will give it (cash, card, or gift), and when I will give it.
+- If I have a themed gift exchange: keep the rule simple and make sure everyone can actually find good gifts inside it. A letter theme works well — randomly pick me an EASY letter (lots of real gifts start with it) if I ask you to choose. The rules are: no wish lists, the gift must be thoughtful and real and fit the theme, and a small cheap gag extra is fine on top — never instead of the real gift.
+- Flag any gift with a deadline (mailing, a party date, a school exchange) and move its buy date earlier.
+
+STEP 2 — ASSIGN AN OWNER TO EVERY TASK (AS AGREED IN THE INTERVIEW)
+Every task in this plan gets an owner: Me, Partner, or Together. If a task has no owner, it defaults to me — and that is exactly what this step fixes. This is a team plan, not a mom plan.
+- Hand over whole chunks, not errands. The owner owns the whole thing start to finish: noticing it needs doing, planning how and when, and doing it (conception, planning, execution). If I still have to remind, plan, and chase it, I still own it — that does not count.
+- Use the split agreed in the interview. Default: Partner owns tree and outdoor lights, Santa photo booking, one planned store trip, and teacher gifts. I own holiday cards and gift planning. Together owns the fun stuff — decorating together, baking, a movie night, and the activities we picked.
+- Put the owner in the gift tracker and next to every task in the week-by-week plan, so everyone can see who owns what without anyone having to nag or ask.
+- Each partner owns the gifts for their own side of the family end to end, unless we agree otherwise.
+
+STEP 3 — HOLIDAY CARDS, ON A TIMELINE
+If I mail cards, build this as its own checklist, working backwards from when cards should arrive:
+- Pick the photo (or book the photo) — date
+- Order cards — date, at least a week before I think I need to
+- Confirm addresses and count how many stamps I need — date
+- Address and stuff envelopes, in one or two sittings (not one heroic night) — dates
+- Mail — date, with a few buffer days before the holiday
+Remind me to order extra envelopes. Everyone ruins a few.
+
+STEP 4 — SUPPLIES BEFORE I NEED THEM
+Give me one supplies checklist and one early buy date, so nothing stops mid-task:
+- Wrapping paper, tape, scissors, gift tags, tissue, gift bags, boxes, ribbon
+- Batteries for anything on the gift list that needs them
+- Cards, envelopes, stamps
+- Baking basics and hosting supplies I said I would need
+- Bags or bins for donations and returns
+
+STEP 5 — SPRINKLE IN THE MAGIC (THIS IS THE POINT)
+A plan that is only errands has failed. Add joy on purpose, while there is still time to book it:
+- Give me a pick-list of holiday activities — I will choose 3 to 5, not 20. Mix the types: light displays AND things that are not light shows — a craft, a baking afternoon, a holiday movie night, a giving / donation activity, a local performance, a neighborhood lights walk, something a little more obscure or different.
+- Tell me where each idea came from (a venue, a local events listing, a parks or library calendar) and offer to find more, or more obscure, options if I want them.
+- Flag anything that books up or opens in a booking window, and put the BOOKING date in the plan — not just the event date.
+- For Santa photos and lights: use the dates agreed in the interview. If I said you pick, use the earliest free weekend date after Thanksgiving for Santa (not mid-December) and the earliest free evening for lights. If reservations open only 7 days ahead, put a ‘book Santa photos today’ task exactly 7 days before that date in the plan, and put both the booking day and the photo day on the calendar.
+- If I said yes to Santa letters in the interview (the default), include this Santa letter set in the plan, with these dates: (1) a personalized letter from Santa in the first week of December — ‘Santa noticed you’ve been good’; (2) time for my child to write and send their wish list, then a reply letter from Santa a few days later in the second week of December saying he received it; (3) a Nice List certificate on Christmas Eve.
+- If I don’t already have a Santa letter set, remind me I need to get one before the first week of December — add ‘get a Santa letter set’ as an early task so it is ready in time.
+- Schedule the magic like it matters. Protect at least one no-plan, do-nothing block each week in December.
+
+STEP 6 — SPACE IT OUT OR IT DOESN’T COUNT
+- Spread the work across the weeks I have. No week gets more than 2 or 3 holiday tasks on top of normal life.
+- Put the heaviest work early. Aim for buying done, cards mailed, and wrapping mostly finished about 10 days before the main date, so the last stretch is for living it, not finishing it.
+- Give every task a specific day, checked against Step 0. If a week is already full in real life, move the task — do not stack it.
+- Build in buffer days before travel, hosting, and performances.
+- End the plan with a short ‘let it go’ list: the things I decided to skip, so I do not re-add them in a panic later.
+
+HOW TO FORMAT EVERYTHING YOU GIVE ME
+- Checklists. Everything is a checklist I can tick off — the week-by-week plan, the gift tracker, the card timeline, the supplies list, the shopping lists.
+- Short bullets. No long paragraphs, no pep talks, no filler. I will ask if I want more detail.
+- Separate my shopping into: order online (with order-by dates), buy in store (grouped into one trip, by store), and pick up.
+- Start with a one-screen summary: my fixed events, my tight weeks, the 3 most time-sensitive tasks, and any interview defaults you used because I skipped a question — say so plainly.
+- Keep it real. If something is unrealistic for my schedule or budget, say so plainly and suggest the smaller version.
+- Privacy: use only the first names or roles I gave you. Never add addresses or personal details I did not provide.
+
+NOW START — WITH THE INTERVIEW
+Begin with Step 0. If you can see my email and calendar, show me what you found, then ask me the interview questions in one round. If you cannot, ask me the connection question once — and if I say no, ask me the interview questions instead. Do not build the plan until I have answered.</pre>
+    <p class="note">Works with or without connecting your email and calendar. If you say no, it asks questions instead. Nobody has to connect anything.</p>
+  </div>
+
+  <div class="card">
+    <h2>Make it work even better</h2>
+    <ul class="tips">
+      <li><strong>Short answers are enough.</strong> "You pick," "Yes," "Standard."</li>
+      <li><strong>Use roles, not real details.</strong> "Partner, Daughter 1, Grandma, Teacher" is all it needs.</li>
+      <li><strong>Say no out loud.</strong> The "what can come off the list" question is the most valuable one. Use it.</li>
+      <li><strong>Ask for a re-plan, not a restart.</strong> "A performance got added on the 13th. Move what clashes."</li>
+      <li><strong>Ask for more magic.</strong> "Give me 5 more options, more obscure, not light shows."</li>
+    </ul>
+  </div>
+
+  <div class="card" id="example">
+    <span class="fiction">Fictional example</span>
+    <h2>What you get back</h2>
+    <p>This is a made-up family: two kids, a partner, grandparents nearby, one office party. It shows the shape of a real plan.</p>
+
+    <p style="margin-top:14px;"><strong>First, a quick interview. Short answers are the whole exchange:</strong></p>
+    <div class="qa"><span class="q">AI:</span> "Do you want to tell me what date you want to go see Santa, or do you just want me to pick?"<br><span class="q">You:</span> <span class="a">"You pick."</span><br><span class="q">AI:</span> "Done. Earliest free weekend after Thanksgiving, booking task 7 days before it."</div>
+    <div class="qa"><span class="q">AI:</span> "Do you want your partner to be a part of this? I'm proposing these tasks for your partner: tree and outdoor lights, Santa photo booking, one store trip, teacher gifts."<br><span class="q">You:</span> <span class="a">"Yes, as proposed."</span></div>
+    <div class="qa"><span class="q">AI:</span> "What can come OFF the list this year?"<br><span class="q">You:</span> <span class="a">"Cut one."</span><br><span class="q">AI:</span> "Used default: I cut the second lights trip. It's in your 'let it go' list."</div>
+    <p class="note" style="margin-bottom:16px;">Then, and only then, it builds the plan. No second round, no back and forth.</p>
+
+    <p><strong>One-screen summary</strong></p>
+    <div class="sum">
+      <p><strong>Fixed:</strong> school concert on the 12th, office party on the 18th, travel on the 23rd.</p>
+      <p><strong>Tight week:</strong> the week of the concert. Only one holiday task goes there.</p>
+      <p><strong>Most time-sensitive:</strong> book Santa exactly 7 days before the earliest free weekend after Thanksgiving; order cards this week; mail the out-of-town gift by the 10th.</p>
+      <p><strong>Defaults used:</strong> Santa date picked by the AI; one lights trip cut per your "cut one" answer.</p>
+    </div>
+
+    <p style="margin-top:18px;"><strong>A sample week, all checklists</strong></p>
+    <ul class="check">
+      <li>Gift deciding session, 30 minutes <span class="own">Me</span><br>One idea and one backup per person, marked online or in-store.</li>
+      <li>Order cards <span class="own">Me</span><br>Use the photo from last month's park day.</li>
+      <li>Book Santa photos for the earliest free weekend after Thanksgiving <span class="own">Partner</span><br>Booking opens exactly 7 days before.</li>
+      <li>Put up outdoor lights <span class="own">Partner</span></li>
+      <li>Teacher gifts sorted start to finish <span class="own">Partner</span></li>
+      <li>Supplies run, same trip as groceries <span class="own">Partner</span><br>Wrap, tape, tags, batteries, stamps.</li>
+      <li>Pick 3 magic things, not 10 <span class="own">Together</span><br>Ours: a letter from Santa in the mailbox, a baking afternoon, a lights walk.</li>
+      <li>Nothing scheduled Friday. On purpose.</li>
+    </ul>
+
+    <p style="margin-top:18px;"><strong>The gift tracker</strong></p>
+    <div class="tablewrap"><table>
+      <tr><th>Person</th><th>Idea</th><th>Where</th><th>Owner</th><th>Done?</th></tr>
+      <tr><td>Partner</td><td>The good headphones</td><td>Online, order by Dec 2</td><td>Me</td><td>&#9744; Bought &#9744; Wrapped</td></tr>
+      <tr><td>Kid 1</td><td>Art kit + sketchbook</td><td>In store, big trip</td><td>Me</td><td>&#9744; Bought &#9744; Wrapped</td></tr>
+      <tr><td>Grandparent</td><td>Framed family photo</td><td>Online, order by Nov 28</td><td>Partner</td><td>&#9744; Bought &#9744; Wrapped</td></tr>
+      <tr><td>Secret Santa ($25, letter S)</td><td>Scarf</td><td>In store, big trip</td><td>Me</td><td>&#9744; Bought &#9744; Wrapped</td></tr>
+      <tr><td>Teacher</td><td>Card + coffee gift card</td><td>Pick up</td><td>Partner</td><td>&#9744; Bought &#9744; Done</td></tr>
+      <tr><td>Household helper</td><td>Holiday bonus + thank-you card</td><td>Give by Dec 18</td><td>Me</td><td>&#9744; Ready &#9744; Given</td></tr>
+      <tr><td>Outdoor lights</td><td>Lights + timer, check bulbs</td><td>Home / store trip</td><td>Partner</td><td>&#9744; Up &#9744; Working</td></tr>
+    </table></div>
+    <p class="note">"Owner" means the whole chunk, not an errand. Whoever is listed notices it, plans it and does it start to finish. No reminding, no chasing. The Secret Santa line shows a real gift that fits the letter, with a silly sticker pack on top as the gag, never instead of the gift.</p>
+  </div>
+
+  <div class="promise">
+    I'm not trying to create a completely stress-free holiday season, because I'm not delusional. This is a plan to make it go a little smoother, so you don't get to December 15 and realize all you did was plan.<br><br>
+    I'm not trying to be a perfect mom. I'm just trying to be a happier one.
+    <small>Less stress &middot; less mess &middot; more joy</small>
+  </div>
+
+  <footer>Made by Steph, a working mom. @stephs.mom.era</footer>
+</div>
+<script>
+const PROMPT = document.getElementById('promptText').textContent;
+function msg(t,err){const m=document.getElementById('copyMsg');m.textContent=t;m.className='msg'+(err?' err':'');}
+async function copyPrompt(){
+  try{await navigator.clipboard.writeText(PROMPT);msg('Copied. Now paste it into ChatGPT, Claude or Gemini.');return;}catch(e){}
+  try{
+    const ta=document.createElement('textarea');ta.value=PROMPT;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();
+    const ok=document.execCommand('copy');document.body.removeChild(ta);
+    if(ok){msg('Copied. Now paste it into ChatGPT, Claude or Gemini.');return;}
+  }catch(e){}
+  const pre=document.getElementById('promptText');pre.style.maxHeight='none';
+  const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);
+  msg('Your phone blocked the button. The prompt is selected: press and hold, then tap Copy.',true);
+}
+</script>
+</body>
+</html>
